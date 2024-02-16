@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <title>Edit Page</title>
+</head>
+
+<body>
+    {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
+        </div>
+    </div>
+    {{/if}}
+    <div id="wrapper">
+        <header>
+            <!-- Navigation -->
+            <nav>
+                <div>
+                    <a href="/">Home</a>
+                    <a href="/dashboard">Dashboard</a>
+                    <a href="/search">Search</a>
+                </div>
+                {{#if isAuthenticated}}
+                <div class="user">
+                    <a href="/create">Add Animal</a>
+                    <a href="/logout">Logout</a>
+                </div>
+                {{else}}
+                <div class="guest">
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                </div>
+                {{/if}}
+            </nav>
+        </header>
+
+        <main class="edit">
+            <!-- Edit Page (Only for logged-in users) -->
+            <section id="create">
+                <div class="form">
+                    <h2>Edit item</h2>
+                    <form class="create-form">
+                        <input type="text" name="" id="name" placeholder="Name" value="Show" />
+                        <input type="text" name="" id="years" placeholder="Years" value="1" />
+                        <input type="text" name="" id="kind" placeholder="Kind" value="Lion" />
+                        <input type="text" name="" id="animal-img" placeholder="Image url" value="" />
+                        <input type="text" name="" id="needs-of" placeholder="Needs of" value="Medicine" />
+                        <input type="text" name="" id="location" placeholder="Location" value="San Diego Zoo" />
+                        <textarea id="description" placeholder="Description..."
+                            name="">Your donation goes a long way towards our cause. Every dollar and item donated goes to the care of lions, animals, and caretakers in urgent need, as well as providing grants to exceptional sanctuaries, and emergency relief efforts in the US and around the world. Tell us where you'd like your gift to go and we will customize your introductory packet to your preferences!</textarea>
+
+                        <button type="submit">Edit</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>@Friendly World</p>
+    </footer>
+</body>
+
+</html>

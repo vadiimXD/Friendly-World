@@ -20,4 +20,14 @@ router.post("/create", isAuth, async (req, res) => {
     }
 })
 
+router.get("/dashboard", async (req, res) => {
+    try {
+        const animals = await animalService.getAllAnimals().lean()
+        res.render("dashboard", { layout: false, animals })
+    } catch (error) {
+        const errorMess = getErrorMessage(error)
+        res.render("404", { layout: false, error: errorMess })
+    }
+})
+
 module.exports = router

@@ -30,4 +30,27 @@ router.get("/dashboard", async (req, res) => {
     }
 })
 
+router.get("/details/:animalId", async (req, res) => {
+    try {
+        const animal = await animalService.getAnimalById(req.params.animalId).lean()
+        const hasOwner = req.user?.userId == animal.owner
+        const isDonated = animalService.checkIsDonated(animal.donations, req.user?.userId)
+        res.render("details", { layout: false, animal, hasOwner, isDonated })
+    } catch (error) {
+        const errorMess = getErrorMessage(error)
+        res.render("404", { layout: false, error: errorMess })
+    }
+})
+
+router.get("/donate/:animalId", isAuth, async (req, res) => {
+    try {
+        await animalService.donateForAnimal(req.params.animalId, req.user.userId)
+        res.redirect(`/details/${req.params.animalId}`)
+    } catch (error) {
+        const errorMess = getErrorMessage(error)
+        res.render("404", { layout: false, error: errorMess })
+    }
+})
+
+
 module.exports = router
